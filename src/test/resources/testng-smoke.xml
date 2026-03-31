@@ -1,0 +1,19 @@
+<!-- src/test/resources/testng-smoke.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SmokeTestSuite" verbose="1">
+
+    <listeners>
+        <listener class-name="framework.utils.RetryListener"/>
+    </listeners>
+
+    <parameter name="browser" value="chrome"/>
+    <parameter name="env" value="dev"/>
+
+    <test name="LoginSmokeTests">
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>

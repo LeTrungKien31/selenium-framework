@@ -1,3 +1,4 @@
+// src/main/java/framework/config/ConfigReader.java
 package framework.config;
 
 import java.io.FileInputStream;
@@ -13,7 +14,7 @@ public class ConfigReader {
         String file = "src/test/resources/config/config-" + env + ".properties";
         try (FileInputStream fis = new FileInputStream(file)) {
             props.load(fis);
-            System.out.println("[ConfigReader] Đang dùng môi trường: " + env);
+            System.out.println("[ConfigReader] Môi trường: " + env);
         } catch (IOException e) {
             throw new RuntimeException("Không tìm thấy config: " + file, e);
         }
@@ -30,4 +31,19 @@ public class ConfigReader {
     public int getImplicitWait()      { return Integer.parseInt(props.getProperty("implicit.wait", "5")); }
     public int getRetryCount()        { return Integer.parseInt(props.getProperty("retry.count", "1")); }
     public String getScreenshotPath() { return props.getProperty("screenshot.path", "target/screenshots/"); }
+
+    // ✅ Ưu tiên GitHub Secrets → fallback về config file
+    public String getUsername() {
+        String envVal = System.getenv("APP_USERNAME");
+        return (envVal != null && !envVal.isBlank()) 
+            ? envVal 
+            : props.getProperty("app.username", "standard_user");
+    }
+
+    public String getPassword() {
+        String envVal = System.getenv("APP_PASSWORD");
+        return (envVal != null && !envVal.isBlank()) 
+            ? envVal 
+            : props.getProperty("app.password", "secret_sauce");
+    }
 }
