@@ -1,3 +1,6 @@
+LINK YOUTUBE
+https://youtu.be/eUr_tVtY36A
+
 # Selenium Framework - Lab 11
 
 Automation testing framework sử dụng Selenium WebDriver + TestNG + POM.
